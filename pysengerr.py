@@ -27,8 +27,8 @@ class App():
 
     def start(self):
         os.system('clear')
-        print(self.logo)
-        self.username = input("Podaj nazwę użytkownika: ")
+        print(textMod(self.logo,28,220,154,1)+'\n')
+        self.username = input(textMod('Podaj nazwę użytkownika: ',197,134,192,1))
         self.run()
 
     def printMessages(self):
@@ -40,8 +40,11 @@ class App():
     def addMessage(self, message):
         now = datetime.now()
         now_formated = now.strftime("%d.%m.%Y-%H:%M")
+        usernameMod = textMod(self.username,28,220,154,1)
+        dateMod = textMod("@"+now_formated,28,220,154,0)
+        endMod = textMod('~ $ ',61,173,232,1)
         file = open(self.databasePath, mode='a')
-        wrappedMessage = f"{textMod(self.username,28,220,154,1)}{textMod("@"+now_formated,28,220,154,0)}:{textMod('~ $ ',61,173,232,1)}{message}\n"
+        wrappedMessage = f"{usernameMod}{dateMod}:{endMod}{message}\n"
         file.write(wrappedMessage)
         file.close()
 
