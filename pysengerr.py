@@ -35,15 +35,15 @@ class App():
         file = open(self.databasePath, mode='r')
         data = file.read()
         print(data)
-        file.close
+        file.close()
 
     def addMessage(self, message):
         now = datetime.now()
         now_formated = now.strftime("%d.%m.%Y-%H:%M")
         file = open(self.databasePath, mode='a')
-        wrappedMessage = f"{textMod(self.username,28,220,154,1)}{textMod(f"@{now_formated}",28,220,154,0)}:{textMod('~ $ ',61,173,232,1)}{message}\n"
+        wrappedMessage = f"{textMod(self.username,28,220,154,1)}{textMod("@"+now_formated,28,220,154,0)}:{textMod('~ $ ',61,173,232,1)}{message}\n"
         file.write(wrappedMessage)
-        file.close
+        file.close()
 
     def run(self):
         while self.running==True:
