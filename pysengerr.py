@@ -20,8 +20,8 @@ class App():
           |  $$$$$$/                              |  $$$$$$/
            \______/                                \______/
         """
-        #self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
-        self.databasePath = 'pysengerrDatabase.txt' #For testing
+        self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
+        #self.databasePath = 'pysengerrDatabase.txt' #For testing
         self.running = True
         self.start()
 
