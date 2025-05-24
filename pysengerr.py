@@ -29,6 +29,10 @@ class App():
         os.system('clear')
         print(textMod(self.logo,28,220,154,1)+'\n')
         self.username = input(textMod('Podaj nazwę użytkownika: ',197,134,192,1))
+
+        #Username color choose 
+        #self.nickColorR
+
         self.run()
 
     def printMessages(self):
