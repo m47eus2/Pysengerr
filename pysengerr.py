@@ -22,14 +22,59 @@ class App():
         """
         self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
         #self.databasePath = 'pysengerrDatabase.txt' #For testing
+        self.usersPath = 'pysengerrUsers.txt' #For testing
         self.running = True
-        self.start()
+        self.exit = True
+        self.logining()
+
+    def logining(self):
+        while self.exit==True:
+            os.system('clear')
+            print(textMod(self.logo,28,220,154,1)+'\n')
+
+            print('1. Zaloguj się')
+            print('2. Utwórz konto')
+            a=input()
+
+            if a=='1':
+                try:
+                    with open("pysengerrUsers.txt", "r") as f:
+                        dane = f.readlines()
+                    self.user = User(dane[0].strip(), dane[1].strip())
+                    os.system('clear')
+                    print(textMod(self.logo,28,220,154,1)+'\n')
+                    login=input('Podaj nik: ')
+
+                    if login==self.user.login:
+                        haslo=input('Podaj haslo: ')
+
+                        if haslo==self.user.password:
+                            self.name=login
+                            self.start()
+                        else:
+                            print('Niepoprawne haslo!')
+                            input()
+                    else:
+                        print('Nie ma takiego konta!')
+                        input()
+                except:
+                    os.system('clear')
+                    print(textMod(self.logo,28,220,154,1)+'\n')
+                    print('Nie ma jeszcze żadnego konta na pysengerr! Stwórz jakieś!')
+                    input()
+
+            if a=='2':
+                os.system('clear')
+                print(textMod(self.logo,28,220,154,1)+'\n')
+                login=input('Jaki chcesz miec nik: ')
+                password=input('Jakie chcesz mieć haslo: ')
+                self.user = User(login, password)
+                with open("pysengerrUsers.txt", "w") as f:
+                    f.write(self.user.login + "\n")
+                    f.write(self.user.password)
+
 
     def start(self):
-        os.system('clear')
-        print(textMod(self.logo,28,220,154,1)+'\n')
-
-        self.name=input('Podaj nazwę urzytkownika: ')
 
         os.system('clear')
         print(textMod(self.logo,28,220,154,1)+'\n')
@@ -81,6 +126,7 @@ class App():
         self.username = textMod(self.name, self.r, self.g, self.b, 1)
 
         self.run()
+        self.exit=False
 
     def printMessages(self):
         file = open(self.databasePath, mode='r')
@@ -110,5 +156,9 @@ class App():
                 break
             self.addMessage(message)
 
+class User():
+    def __init__(self, a, b):
+        self.login = a
+        self.password = b
 
 app = App()
