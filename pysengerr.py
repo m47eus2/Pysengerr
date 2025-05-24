@@ -28,10 +28,57 @@ class App():
     def start(self):
         os.system('clear')
         print(textMod(self.logo,28,220,154,1)+'\n')
-        self.username = input(textMod('Podaj nazwę użytkownika: ',197,134,192,1))
 
-        #Username color choose 
-        #self.nickColorR
+        self.name=input('Podaj nazwę urzytkownika: ')
+
+        os.system('clear')
+        print(textMod(self.logo,28,220,154,1)+'\n')
+
+        #Username color choose
+        print('1. ', textMod(self.name, 255, 0, 0, 1))
+        print('2. ', textMod(self.name, 255, 127, 0, 1))
+        print('3. ', textMod(self.name, 255, 225, 0, 1))
+        print('4. ', textMod(self.name, 0, 255, 0, 1))
+        print('5. ', textMod(self.name, 0, 255, 255, 1))
+        print('6. ', textMod(self.name, 0, 0, 255, 1))
+        print('7. ', textMod(self.name, 127, 0, 255, 1))
+        print('8. ', textMod(self.name, 255, 0, 255, 1))
+        self.nickColor = input('Wybierz kolor swojego nicku: ')
+
+        if self.nickColor=='1':
+            self.r = 255
+            self.g = 0
+            self.b = 0
+        if self.nickColor=='2':
+            self.r = 255
+            self.g = 127
+            self.b = 0
+        if self.nickColor=='3':
+            self.r = 255
+            self.g = 255
+            self.b = 0
+        if self.nickColor=='4':
+            self.r = 0
+            self.g = 255
+            self.b = 0
+        if self.nickColor=='5':
+            self.r = 0
+            self.g = 255
+            self.b = 255
+        if self.nickColor=='6':
+            self.r = 0
+            self.g = 0
+            self.b = 255
+        if self.nickColor=='7':
+            self.r = 127
+            self.g = 0
+            self.b = 255
+        if self.nickColor=='8':
+            self.r = 255
+            self.g = 0
+            self.b = 255
+
+        self.username = textMod(self.name, self.r, self.g, self.b, 1)
 
         self.run()
 
@@ -44,7 +91,7 @@ class App():
     def addMessage(self, message):
         now = datetime.now()
         now_formated = now.strftime("%d.%m.%Y-%H:%M")
-        usernameMod = textMod(self.username,28,220,154,1)
+        usernameMod = textMod(self.username,self.r,self.g,self.b,1)
         dateMod = textMod("@"+now_formated,28,220,154,0)
         endMod = textMod('~ $ ',61,173,232,1)
         file = open(self.databasePath, mode='a')
@@ -57,7 +104,7 @@ class App():
             os.system('clear')
             self.printMessages()
             print()
-            message = input(textMod('Napisz wiadomość: ',197,134,192,1))
+            message = input(textMod('Napisz wiadomość: ',self.r,self.g,self.b,1))
             if(message == ':q'):
                 self.running=False
                 break
