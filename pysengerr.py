@@ -1,8 +1,7 @@
 import os
 from datetime import datetime
 
-from logo import logo
-from settings import colors
+from settings import logo, colors
 
 def textMod(text, color, bold):
     style = '\033[1m' if bold else ''
@@ -11,20 +10,17 @@ def textMod(text, color, bold):
 class App():
     def __init__(self):
         self.logo = logo
-        #self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
-        self.databasePath = 'pysengerrDatabase.txt' #For testing
+        self.databasePath = 'pysengerrDatabase.txt'
         self.running = True
         self.start()
 
     def start(self):
         os.system('clear')
         print(textMod(self.logo,colors['terminalGreen'],1)+'\n')
-
         self.username=input('Podaj nazwę urzytkownika: ')
 
         os.system('clear')
         print(textMod(self.logo,colors['terminalGreen'],1)+'\n')
-
         #Username color choose
         print('1. ', textMod(self.username, colors['red'],1))
         print('2. ', textMod(self.username, colors['orange'], 1))
