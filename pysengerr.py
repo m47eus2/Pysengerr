@@ -7,10 +7,10 @@ from settings import textMod
 class App():
     def __init__(self):
         self.logo = logo
-        #self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
-        #self.usersPath = 'home/raspberrypi/.pysengerrUsers.txt'
-        self.databasePath = 'pysengerrDatabase.txt' #For testing
-        self.usersPath = 'pysengerrUsers.txt' #For testing
+        self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
+        self.usersPath = 'home/raspberrypi/.pysengerrUsers.txt'
+        #self.databasePath = 'pysengerrDatabase.txt' #For testing
+        #self.usersPath = 'pysengerrUsers.txt' #For testing
         self.running = True
         self.exit = True
         self.logining()
