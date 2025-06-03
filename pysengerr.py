@@ -1,27 +1,15 @@
 import os
 from datetime import datetime
+from settings import logo
+from settings import textMod
 
-def textMod(text, r, g, b, bold):
-    style = '\033[1m' if bold else ''
-    return f"{style}\033[38;2;{r};{g};{b}m{text}\033[0m"
 
 class App():
     def __init__(self):
-        self.logo = r"""
- /$$$$$$$
-| $$__  $$
-| $$  \ $$ /$$   /$$  /$$$$$$$  /$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$
-| $$$$$$$/| $$  | $$ /$$_____/ /$$__  $$| $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$
-| $$____/ | $$  | $$|  $$$$$$ | $$$$$$$$| $$  \ $$| $$  \ $$| $$$$$$$$| $$  \__/| $$  \__/
-| $$      | $$  | $$ \____  $$| $$_____/| $$  | $$| $$  | $$| $$_____/| $$      | $$
-| $$      |  $$$$$$$ /$$$$$$$/|  $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$| $$      | $$
-|__/       \____  $$|_______/  \_______/|__/  |__/ \____  $$ \_______/|__/      |__/
-           /$$  | $$                               /$$  \ $$
-          |  $$$$$$/                              |  $$$$$$/
-           \______/                                \______/
-        """
-        self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
-        #self.databasePath = 'pysengerrDatabase.txt' #For testing
+        self.logo = logo
+        #self.databasePath = '/home/raspberrypi/.pysengerrDatabase.txt'
+        #self.usersPath = 'home/raspberrypi/.pysengerrUsers.txt'
+        self.databasePath = 'pysengerrDatabase.txt' #For testing
         self.usersPath = 'pysengerrUsers.txt' #For testing
         self.running = True
         self.exit = True
@@ -34,6 +22,7 @@ class App():
 
             print('1. Zaloguj się')
             print('2. Utwórz konto')
+            print('3. Wyjdź z pysenderr')
             a=input()
 
             if a=='1':
@@ -50,6 +39,7 @@ class App():
 
                         if haslo==self.user.password:
                             self.name=login
+                            self.exit = False
                             self.start()
                         else:
                             print('Niepoprawne haslo!')
@@ -57,7 +47,7 @@ class App():
                     else:
                         print('Nie ma takiego konta!')
                         input()
-                except:
+                except FileNotFoundError:
                     os.system('clear')
                     print(textMod(self.logo,28,220,154,1)+'\n')
                     print('Nie ma jeszcze żadnego konta na pysengerr! Stwórz jakieś!')
@@ -72,6 +62,15 @@ class App():
                 with open("pysengerrUsers.txt", "w") as f:
                     f.write(self.user.login + "\n")
                     f.write(self.user.password)
+            
+            if a=='3':
+                os.system('clear')
+                print(textMod(self.logo,28,220,154,1)+'\n')
+                print('Na pewno?')
+                a=input(f"[{textMod('y', 255, 0, 0, 1)},{textMod('N', 0, 255, 0, 1)}]: ")
+
+                if a=='y':
+                    self.exit=False
 
 
     def start(self):
